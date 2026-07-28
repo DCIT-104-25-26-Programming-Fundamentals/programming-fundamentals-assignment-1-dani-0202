@@ -59,4 +59,97 @@
 # =============================================================================
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
+def read_matrix(rows, columns):
+    matrix = []
 
+    for i in range(rows):
+        row = list(map(float, input(f"Enter row {i + 1}: ").split()))
+        matrix.append(row)
+
+    return matrix
+
+
+def display_matrix(matrix):
+    for row in matrix:
+        for value in row:
+            print(f"{value:8.2f}", end="")
+        print()
+
+
+def transpose_matrix(matrix):
+    transpose = []
+
+    for j in range(len(matrix[0])):
+        row = []
+
+        for i in range(len(matrix)):
+            row.append(matrix[i][j])
+
+        transpose.append(row)
+
+    return transpose
+
+
+def add_matrices(matrix1, matrix2):
+    result = []
+
+    for i in range(len(matrix1)):
+        row = []
+
+        for j in range(len(matrix1[0])):
+            row.append(matrix1[i][j] + matrix2[i][j])
+
+        result.append(row)
+
+    return result
+
+
+def multiply_matrices(matrix1, matrix2):
+    result = []
+
+    for i in range(len(matrix1)):
+        row = []
+
+        for j in range(len(matrix2[0])):
+            total = 0
+
+            for k in range(len(matrix2)):
+                total += matrix1[i][k] * matrix2[k][j]
+
+            row.append(total)
+
+        result.append(row)
+
+    return result
+
+
+rows = int(input("Enter number of rows: "))
+columns = int(input("Enter number of columns: "))
+
+matrix = read_matrix(rows, columns)
+display_matrix(transpose_matrix(matrix))
+
+
+rows = int(input("Enter number of rows: "))
+columns = int(input("Enter number of columns: "))
+
+matrix1 = read_matrix(rows, columns)
+matrix2 = read_matrix(rows, columns)
+
+display_matrix(add_matrices(matrix1, matrix2))
+
+
+rows_a = int(input("Enter number of rows: "))
+columns_a = int(input("Enter number of columns: "))
+
+matrix1 = read_matrix(rows_a, columns_a)
+
+rows_b = int(input("Enter number of rows: "))
+columns_b = int(input("Enter number of columns: "))
+
+matrix2 = read_matrix(rows_b, columns_b)
+
+if columns_a == rows_b:
+    display_matrix(multiply_matrices(matrix1, matrix2))
+else:
+    print("Matrix multiplication is not possible.")
